@@ -20,7 +20,7 @@ def get_last_checkpoint(checkpoint_dir):
 
 
 def merge():
-    output_dir = "./content/drive/MyDrive/llama-2-chat-functions-7b"
+    output_dir = "/content/drive/MyDrive/llama-2-chat-functions-7b"
     base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf", device_map="auto")
     checkpoint_dir, _completed_training = get_last_checkpoint(output_dir)
     print(checkpoint_dir)
