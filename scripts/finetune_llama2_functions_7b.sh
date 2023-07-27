@@ -18,6 +18,7 @@ python qlora.py \
     --remove_unused_columns False \
     --do_train \
     --do_eval \
+    --do_predict \
     --lora_r 64 \
     --lora_alpha 16 \
     --lora_modules all \
