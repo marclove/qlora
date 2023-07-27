@@ -11,8 +11,9 @@ python qlora.py \
     --eval_dataset_size 1024 \
     --max_eval_samples 1000 \
     --per_device_eval_batch_size 1 \
-    --max_new_tokens 260 \
+    --max_new_tokens 256 \
     --dataloader_num_workers 1 \
+    --group_by_length \
     --logging_strategy steps \
     --remove_unused_columns False \
     --do_train \
@@ -27,8 +28,8 @@ python qlora.py \
     --warmup_ratio 0.03 \
     --lr_scheduler_type constant \
     --gradient_checkpointing \
-    --source_max_len 1788 \
-    --target_max_len 260 \
+    --source_max_len 1664 \
+    --target_max_len 256 \
     --per_device_train_batch_size 1 \
     --gradient_accumulation_steps 16 \
     --max_steps 10000 \
