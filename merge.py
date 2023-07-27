@@ -22,7 +22,7 @@ def get_last_checkpoint(checkpoint_dir):
 def merge():
     output_dir = "/content/drive/MyDrive/llama-2-chat-functions-7b"
     checkpoint_dir, _completed_training = get_last_checkpoint(output_dir)
-    config = AutoConfig.from_pretrained(join(checkpoint_dir, 'adapter_model', 'config.json'))
+    config = AutoConfig.from_pretrained(join(checkpoint_dir, 'adapter_model', 'adapter_config.json'))
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
     base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf", device_map="auto")
     base_model.config = config
