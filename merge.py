@@ -1,6 +1,6 @@
 import os
 from os.path import exists, join, isdir
-from transformers import AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, AutoConfig, AutoTokenizer
 from peft import PeftModel
 
 
@@ -21,14 +21,18 @@ def get_last_checkpoint(checkpoint_dir):
 
 def merge():
     output_dir = "/content/drive/MyDrive/llama-2-chat-functions-7b"
-    base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf", device_map="auto")
     checkpoint_dir, _completed_training = get_last_checkpoint(output_dir)
-    print(checkpoint_dir)
-    print(join(checkpoint_dir, 'adapter_model'))
-    model_to_merge = PeftModel.from_pretrained(base_model, join(checkpoint_dir, 'adapter_model'))
-    merged_model = model_to_merge.merge_and_unload()
-    merged_model.save_pretrained("llama-2-7b-chat-hf-functions-v1")
-
+    config = AutoConfig.from_pretrained(join(checkpoint_dir, 'adapter_model', 'config.json'))
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
+    base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf", device_map="auto")
+    base_model.config = config
+    model = PeftModel.from_pretrained(base_model, join(checkpoint_dir, 'adapter_model'))
+    model = model.base_model.model
+    name = "llama-2-7b-chat-hf-functions-v1"
+    # model.save_pretrained(join(output_dir, "final"))
+    # tokenizer.save_pretrained(join(output_dir, "final"))
+    model.push_to_hub(name, use_temp_dir=True)
+    tokenizer.push_to_hub(name, use_temp_dir=True)
 
 if __name__ == "__main__":
     merge()
