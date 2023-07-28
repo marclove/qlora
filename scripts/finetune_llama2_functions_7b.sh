@@ -10,7 +10,7 @@ python qlora.py \
     --evaluation_strategy steps \
     --eval_dataset_size 1024 \
     --max_eval_samples 1000 \
-    --max_train_samples 4000 \
+    --max_steps 4000 \
     --per_device_eval_batch_size 1 \
     --max_new_tokens 256 \
     --dataloader_num_workers 1 \
