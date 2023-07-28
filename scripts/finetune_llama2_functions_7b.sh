@@ -20,7 +20,6 @@ python qlora.py \
     --do_train \
     --do_eval \
     --do_predict \
-    --predict_with_generate \
     --lora_r 64 \
     --lora_alpha 16 \
     --lora_modules all \
