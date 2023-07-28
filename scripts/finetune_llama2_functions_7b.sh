@@ -1,15 +1,16 @@
 python qlora.py \
     --model_name_or_path meta-llama/Llama-2-7b-chat-hf \
     --use_auth \
-    --output_dir ./output/llama-2-chat-functions-7b \
+    --output_dir /content/drive/MyDrive/llama-2-chat-functions-7b-v2 \
     --logging_steps 10 \
     --save_strategy steps \
     --data_seed 42 \
-    --save_steps 100 \
+    --save_steps 200 \
     --save_total_limit 40 \
     --evaluation_strategy steps \
     --eval_dataset_size 1024 \
     --max_eval_samples 1000 \
+    --max_train_samples 4000 \
     --per_device_eval_batch_size 1 \
     --max_new_tokens 256 \
     --dataloader_num_workers 1 \
@@ -19,6 +20,7 @@ python qlora.py \
     --do_train \
     --do_eval \
     --do_predict \
+    --predict_with_generate \
     --lora_r 64 \
     --lora_alpha 16 \
     --lora_modules all \
@@ -33,8 +35,7 @@ python qlora.py \
     --target_max_len 256 \
     --per_device_train_batch_size 1 \
     --gradient_accumulation_steps 16 \
-    --max_steps 10000 \
-    --eval_steps 100 \
+    --eval_steps 200 \
     --learning_rate 0.0002 \
     --adam_beta2 0.999 \
     --max_grad_norm 0.3 \
