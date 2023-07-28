@@ -23,8 +23,8 @@ def get_last_checkpoint(checkpoint_dir):
 def merge():
     name = "llama-2-7b-chat-hf-functions-v2"
     output_dir = "/content/drive/MyDrive/llama-2-chat-functions-7b-v2"
-    checkpoint_dir, _completed_training = get_last_checkpoint(output_dir)
-    adapter_dir = join(output_dir, 'completed', 'adapter_model')
+    # checkpoint_dir, _completed_training = get_last_checkpoint(output_dir)
+    adapter_dir = join(output_dir, 'checkpoint-2000', 'adapter_model')
     model = AutoPeftModelForCausalLM.from_pretrained(adapter_dir, device_map="auto", torch_dtype=torch.bfloat16)
     model = model.merge_and_unload()
     output_merged_dir = join(output_dir, "merged")
